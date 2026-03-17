@@ -1,0 +1,103 @@
+.orders-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 40px 24px;
+}
+
+.orders-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.orders-title {
+  font-size: 28px;
+}
+
+.orders-back {
+  padding: 10px 20px;
+  background-color: #f3f4f6;
+  color: #333;
+  border-radius: 8px;
+}
+
+.orders-back:hover {
+  background-color: #e5e7eb;
+}
+
+.orders-error {
+  color: #dc2626;
+  background-color: #fef2f2;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.orders-empty {
+  color: #666;
+  font-size: 14px;
+}
+
+.order-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+}
+
+.order-id {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.order-status {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.order-status span {
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.status-pending {
+  background-color: #fef9c3;
+  color: #854d0e;
+}
+
+.status-accepted {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status-in_progress {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-delivered {
+  background-color: #f0fdf4;
+  color: #15803d;
+}
+
+.status-declined {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.order-date {
+  font-size: 13px;
+  color: #999;
+  margin-top: 8px;
+}
