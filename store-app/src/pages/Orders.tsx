@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import '../styles/orders.css';
+import '../styles/Orders.css';
+
+interface OrderItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  subtotal: number;
+}
 
 interface Order {
   id: string;
@@ -10,6 +18,7 @@ interface Order {
   deliveryId: string | null;
   status: string;
   createdAt: string;
+  items?: OrderItem[];
 }
 
 const Orders = () => {
@@ -22,7 +31,16 @@ const Orders = () => {
       try {
         const storeResponse = await api.get('/stores/my-store');
         const ordersResponse = await api.get(`/orders/store/${storeResponse.data.id}`);
-        setOrders(ordersResponse.data);
+        const ordersData = ordersResponse.data;
+
+        const ordersWithItems = await Promise.all(
+          ordersData.map(async (order: Order) => {
+            const itemsResponse = await api.get(`/orders/${order.id}/items`);
+            return { ...order, items: itemsResponse.data };
+          })
+        );
+
+        setOrders(ordersWithItems);
       } catch {
         setError('Error fetching orders');
       }
@@ -57,6 +75,22 @@ const Orders = () => {
                 {order.status}
               </span>
             </p>
+
+            {order.items && order.items.length > 0 && (
+              <div className="order-items">
+                {order.items.map((item) => (
+                  <div key={item.id} className="order-item">
+                    <span>{item.name} x {item.quantity}</span>
+                    <span>${item.subtotal}</span>
+                  </div>
+                ))}
+                <div className="order-total">
+                  <span>Total</span>
+                  <span>${order.items.reduce((sum, item) => sum + item.subtotal, 0)}</span>
+                </div>
+              </div>
+            )}
+
             <p className="order-date">
               {new Date(order.createdAt).toLocaleString()}
             </p>

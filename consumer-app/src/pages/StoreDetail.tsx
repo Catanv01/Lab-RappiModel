@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import api from '../services/api';
-import '../styles/storeDetail.css';
+import '../styles/StoreDetail.css';
 
 interface Product {
   id: string;
@@ -41,6 +41,7 @@ const StoreDetail = () => {
   }, [id]);
 
   const handleAddToCart = (product: Product) => {
+    if (!store?.isOpen) return;
     addItem(
       {
         productId: product.id,
@@ -66,6 +67,12 @@ const StoreDetail = () => {
           {store?.isOpen ? '🟢 Open' : '🔴 Closed'}
         </p>
 
+        {store && !store.isOpen && (
+          <div className="storedetail-closed-banner">
+            🚫 This store is currently closed. You cannot add products to your cart.
+          </div>
+        )}
+
         {error && <p className="storedetail-error">{error}</p>}
 
         {products.length === 0 && <p className="storedetail-empty">No products available</p>}
@@ -77,8 +84,9 @@ const StoreDetail = () => {
               <p className="product-info-price">${product.price}</p>
             </div>
             <button
-              className="product-add-button"
+              className={store?.isOpen ? 'product-add-button' : 'product-add-button-disabled'}
               onClick={() => handleAddToCart(product)}
+              disabled={!store?.isOpen}
             >
               Add
             </button>

@@ -83,8 +83,8 @@ export const getOrderItemsService = async (orderId: string): Promise<any[]> => {
 
 export const getOrdersByDeliveryService = async (deliveryId: string): Promise<Order[]> => {
   const dbRequest = await pool.query(
-    'SELECT * FROM orders WHERE "deliveryId" = $1 ORDER BY "createdAt" DESC',
-    [deliveryId]
+    'SELECT * FROM orders WHERE "deliveryId" = $1 AND status = $2 ORDER BY "createdAt" DESC',
+    [deliveryId, 'accepted']
   );
   return dbRequest.rows;
 };

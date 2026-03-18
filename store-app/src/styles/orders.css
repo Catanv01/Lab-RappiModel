@@ -101,3 +101,28 @@
   color: #999;
   margin-top: 8px;
 }
+
+.order-items {
+  margin: 12px 0;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 12px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 8px;
+  margin-top: 8px;
+}

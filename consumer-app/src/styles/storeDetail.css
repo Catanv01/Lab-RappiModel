@@ -112,3 +112,21 @@
 .storedetail-cart-button:hover {
   background-color: #1d4ed8;
 }
+
+.storedetail-closed-banner {
+  background-color: #fef2f2;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.product-add-button-disabled {
+  padding: 8px 16px;
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
