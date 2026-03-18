@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import api from '../services/api';
-import '../styles/StoreDetail.css';
+import '../styles/storeDetail.css';
 
 interface Product {
   id: string;
