@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../service/api';
-import '../styles/myOrders.css';
+import api from '../service/api'
+import '../styles/MyOrders.css';
 
 interface Order {
   id: string;
@@ -20,8 +20,8 @@ const MyOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await api.get('/orders/available');
-        setOrders(response.data.filter((o: Order) => o.status === 'accepted'));
+        const response = await api.get('/orders/delivery-orders');
+        setOrders(response.data);
       } catch {
         setError('Error fetching orders');
       }

@@ -7,6 +7,7 @@ import {
   getOrdersByStoreService,
   updateOrderStatusService,
   getOrderItemsService,
+  getOrdersByDeliveryService,
 } from './order.service';
 import { getUserFromRequest } from '../../middlewares/authMiddleware';
 import { OrderStatus } from './order.types';
@@ -25,6 +26,12 @@ export const getStoreOrdersController = async (req: Request, res: Response) => {
 
 export const getAvailableOrdersController = async (req: Request, res: Response) => {
   const orders = await getAvailableOrdersService();
+  return res.json(orders);
+};
+
+export const getDeliveryOrdersController = async (req: Request, res: Response) => {
+  const user = getUserFromRequest(req);
+  const orders = await getOrdersByDeliveryService(user.id);
   return res.json(orders);
 };
 
