@@ -1,0 +1,111 @@
+.available-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 40px 24px;
+}
+
+.available-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.available-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.available-title {
+  font-size: 28px;
+}
+
+.available-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.available-myorders-button {
+  padding: 10px 20px;
+  background-color: #f3f4f6;
+  color: #333;
+  border-radius: 8px;
+}
+
+.available-myorders-button:hover {
+  background-color: #e5e7eb;
+}
+
+.available-logout {
+  padding: 10px 20px;
+  background-color: #f3f4f6;
+  color: #333;
+  border-radius: 8px;
+}
+
+.available-logout:hover {
+  background-color: #e5e7eb;
+}
+
+.available-error {
+  color: #dc2626;
+  background-color: #fef2f2;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.available-empty {
+  color: #666;
+  font-size: 14px;
+}
+
+.available-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 12px;
+}
+
+.available-card-id {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.available-card-date {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 16px;
+}
+
+.available-card-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.available-accept {
+  flex: 1;
+  padding: 10px;
+  background-color: #16a34a;
+  color: white;
+  border-radius: 8px;
+}
+
+.available-accept:hover {
+  background-color: #15803d;
+}
+
+.available-decline {
+  flex: 1;
+  padding: 10px;
+  background-color: #fef2f2;
+  color: #dc2626;
+  border-radius: 8px;
+}
+
+.available-decline:hover {
+  background-color: #fee2e2;
+}

@@ -3,8 +3,10 @@ import Boom from '@hapi/boom';
 import {
   authenticateUserService,
   createUserService,
+  getMeService,
 } from './auth.service';
 import { UserRole } from './auth.types';
+import { getUserFromRequest } from '../../middlewares/authMiddleware';
 
 export const authenticateUserController = async (
   req: Request,
@@ -59,4 +61,10 @@ export const createUserController = async (req: Request, res: Response) => {
 
   const user = await createUserService({ email, password, role, name, storeName });
   return res.status(201).json(user);
+};
+
+export const getMeController = async (req: Request, res: Response) => {
+  const user = getUserFromRequest(req);
+  const userData = await getMeService(user.id);
+  return res.json(userData);
 };

@@ -69,3 +69,14 @@ export const updateOrderStatusService = async (data: UpdateOrderStatusDTO): Prom
 
   return dbRequest.rows[0];
 };
+
+export const getOrderItemsService = async (orderId: string): Promise<any[]> => {
+  const dbRequest = await pool.query(
+    `SELECT oi.id, oi.quantity, p.name, p.price, (oi.quantity * p.price) as subtotal
+     FROM order_items oi
+     JOIN products p ON oi."productId" = p.id
+     WHERE oi."orderId" = $1`,
+    [orderId]
+  );
+  return dbRequest.rows;
+};

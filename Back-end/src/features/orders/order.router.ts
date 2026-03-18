@@ -5,6 +5,7 @@ import {
   getMyOrdersController,
   getStoreOrdersController,
   updateOrderStatusController,
+  getOrderItemsController
 } from './order.controller';
 import { authMiddleware } from '../../middlewares/authMiddleware';
 
@@ -16,3 +17,4 @@ router.get('/available', getAvailableOrdersController);
 router.get('/store/:storeId', getStoreOrdersController); 
 router.post('/', createOrderController);                
 router.patch('/:id/status', updateOrderStatusController);
+router.get('/:id/items', getOrderItemsController);
