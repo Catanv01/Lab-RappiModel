@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../service/api';
-import '../styles/MyOrders.css';
+import '../styles/myOrders.css';
 
 interface Order {
   id: string;

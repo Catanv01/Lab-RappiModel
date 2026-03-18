@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
-import '../styles/Cart.css';
+import '../styles/cart.css';
 
 const Cart = () => {
   const navigate = useNavigate();
