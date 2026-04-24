@@ -5,6 +5,8 @@ export interface Order {
   deliveryId: string | null;
   status: OrderStatus;
   createdAt: string;
+  delivery_position?: { lat: number; lng: number } | null;
+  destination?: { lat: number; lng: number };
 }
 
 export interface OrderItem {
@@ -15,16 +17,18 @@ export interface OrderItem {
 }
 
 export enum OrderStatus {
-  PENDING = 'pending',
-  ACCEPTED = 'accepted',
-  IN_PROGRESS = 'in_progress',
-  DELIVERED = 'delivered',
-  DECLINED = 'declined',
+  CREATED = 'Creado',
+  IN_DELIVERY = 'En entrega',
+  DELIVERED = 'Entregado',
 }
 
 export interface CreateOrderDTO {
   consumerId: string;
   storeId: string;
+  destination: {
+    lat: number;
+    lng: number;
+  };
   items: {
     productId: string;
     quantity: number;
@@ -35,4 +39,10 @@ export interface UpdateOrderStatusDTO {
   id: string;
   status: OrderStatus;
   deliveryId?: string;
+}
+
+export interface UpdateOrderPositionDTO {
+  id: string;
+  lat: number;
+  lng: number;
 }
