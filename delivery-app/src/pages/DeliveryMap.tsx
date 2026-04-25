@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -50,7 +50,7 @@ const DeliveryMap = () => {
   const [error, setError] = useState('');
 
   const throttleRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const pendingPosition = useRef(position);
+  const pendingPosition = useRef<Position>({ lat: 3.451, lng: -76.532 });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const channelRef = useRef<any>(null);
 
@@ -68,32 +68,29 @@ const DeliveryMap = () => {
 
   useEffect(() => {
     if (!id) return;
-
     const channel = supabase.channel(`order:${id}`);
     channelRef.current = channel;
     channel.subscribe();
-
     return () => {
       supabase.removeChannel(channel);
     };
   }, [id]);
 
-  const updatePosition = async (pos: Position) => {
+  const updatePosition = useCallback(async (pos: Position) => {
     try {
+
       const response = await api.patch(`/orders/${id}/position`, {
         lat: pos.lat,
         lng: pos.lng,
       });
 
-      // Emitir posición via Supabase Broadcast
       channelRef.current?.send({
         type: 'broadcast',
         event: 'position-update',
         payload: pos,
       });
 
-      // Si el backend detectó que llegó al destino
-      if (response.data.status === 'Entregado') {
+      if (response.data.status === 'delivered') {
         setDelivered(true);
         channelRef.current?.send({
           type: 'broadcast',
@@ -104,11 +101,20 @@ const DeliveryMap = () => {
     } catch {
       setError('Error updating position');
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      let { lat, lng } = position;
+
+      if(delivered) return;
+      // Prevenir scroll de la página con las flechas
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+      }
+
+      const current = pendingPosition.current;
+      let lat = current.lat;
+      let lng = current.lng;
 
       switch (e.key) {
         case 'ArrowUp':    lat += STEP; break;
@@ -118,9 +124,11 @@ const DeliveryMap = () => {
         default: return;
       }
 
-      // Mover marcador inmediatamente
-      setPosition({ lat, lng });
-      pendingPosition.current = { lat, lng };
+      const newPos = { lat, lng };
+
+      // Actualizar marcador inmediatamente
+      setPosition(newPos);
+      pendingPosition.current = newPos;
 
       // Throttle: llamar API máximo una vez por segundo
       if (throttleRef.current) return;
@@ -136,7 +144,7 @@ const DeliveryMap = () => {
       window.removeEventListener('keydown', handleKeyDown);
       if (throttleRef.current) clearTimeout(throttleRef.current);
     };
-  }, [position]);
+  }, [updatePosition]);
 
   const destination = order?.destination
     ? { lat: order.destination.coordinates[1], lng: order.destination.coordinates[0] }
@@ -166,6 +174,7 @@ const DeliveryMap = () => {
 
         <div className="deliverymap-map">
           <MapContainer
+            keyboard={!delivered}
             center={[position.lat, position.lng]}
             zoom={16}
             style={{ height: '500px', width: '100%', borderRadius: '12px' }}

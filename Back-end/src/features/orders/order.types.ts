@@ -17,9 +17,9 @@ export interface OrderItem {
 }
 
 export enum OrderStatus {
-  CREATED = 'Creado',
-  IN_DELIVERY = 'En entrega',
-  DELIVERED = 'Entregado',
+  CREATED = 'pending',
+  IN_DELIVERY = 'in_progress',
+  DELIVERED = 'delivered',
 }
 
 export interface CreateOrderDTO {

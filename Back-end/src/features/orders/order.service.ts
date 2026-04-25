@@ -110,6 +110,8 @@ export const updateOrderPositionService = async (data: UpdateOrderPositionDTO): 
     [data.id]
   );
 
+  console.log(distanceCheck.rows[0]?.arrived)
+
   if (distanceCheck.rows[0]?.arrived) {
     await pool.query(
       `UPDATE orders SET status = $1 WHERE id = $2`,
