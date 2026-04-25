@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { supabase } from '../config/supabase';
 import api from '../service/api';
-import '../styles/DeliveryMap.css';
+import '../styles/deliveryMap.css';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;

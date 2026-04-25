@@ -5,7 +5,7 @@ import L from 'leaflet';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
-import '../styles/Cart.css';
+import '../styles/cart.css';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;

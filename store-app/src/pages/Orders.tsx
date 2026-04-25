@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { supabase } from '../config/supabase';
-import '../styles/Orders.css';
+import '../styles/orders.css';
 
 interface OrderItem {
   id: string;
