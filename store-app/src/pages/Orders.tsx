@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import '../styles/orders.css';
+import { supabase } from '../config/supabase';
+import '../styles/Orders.css';
 
 interface OrderItem {
   id: string;
@@ -41,15 +42,44 @@ const Orders = () => {
         );
 
         setOrders(ordersWithItems);
+
+        // Suscribirse a cada orden en tiempo real
+        ordersData.forEach((order: Order) => {
+          const channel = supabase.channel(`order:${order.id}`);
+
+          channel.on('broadcast', { event: 'position-update' }, () => {
+            // Actualizar status de la orden en tiempo real
+            setOrders((prev) =>
+              prev.map((o) =>
+                o.id === order.id ? { ...o, status: 'En entrega' } : o
+              )
+            );
+          });
+
+          channel.on('broadcast', { event: 'order-delivered' }, () => {
+            setOrders((prev) =>
+              prev.map((o) =>
+                o.id === order.id ? { ...o, status: 'Entregado' } : o
+              )
+            );
+          });
+
+          channel.subscribe();
+        });
+
       } catch {
         setError('Error fetching orders');
       }
     };
     fetchData();
+
+    return () => {
+      supabase.removeAllChannels();
+    };
   }, []);
 
   const getStatusClass = (status: string) => {
-    return `status-${status}`;
+    return `status-${status.replace(' ', '_')}`;
   };
 
   return (

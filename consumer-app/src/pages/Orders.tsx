@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-import '../styles/orders.css';
+import '../styles/Orders.css';
 
 interface OrderItem {
   id: string;
@@ -32,7 +32,6 @@ const Orders = () => {
         const response = await api.get('/orders/my-orders');
         const ordersData = response.data;
 
-        // Fetch items for each order
         const ordersWithItems = await Promise.all(
           ordersData.map(async (order: Order) => {
             const itemsResponse = await api.get(`/orders/${order.id}/items`);
@@ -49,7 +48,7 @@ const Orders = () => {
   }, []);
 
   const getStatusClass = (status: string) => {
-    return `status-${status}`;
+    return `status-${status.replace(' ', '_')}`;
   };
 
   return (
@@ -94,6 +93,15 @@ const Orders = () => {
             <p className="order-date">
               {new Date(order.createdAt).toLocaleString()}
             </p>
+
+            {order.status !== 'Entregado' && (
+              <button
+                className="order-track-button"
+                onClick={() => navigate(`/orders/${order.id}/tracking`)}
+              >
+                🗺️ Track Order
+              </button>
+            )}
           </div>
         ))}
       </div>

@@ -104,3 +104,31 @@
 .cart-checkout-button:hover {
   background-color: #1d4ed8;
 }
+
+.cart-map-section {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.cart-map-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cart-map-hint {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.cart-map-selected {
+  font-size: 13px;
+  color: #16a34a;
+  margin-bottom: 8px;
+}
+
+.cart-map {
+  border-radius: 12px;
+  overflow: hidden;
+}

@@ -1,0 +1,92 @@
+.tracking-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 40px 24px;
+}
+
+.tracking-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tracking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.tracking-title {
+  font-size: 28px;
+}
+
+.tracking-back {
+  padding: 10px 20px;
+  background-color: #f3f4f6;
+  color: #333;
+  border-radius: 8px;
+}
+
+.tracking-back:hover {
+  background-color: #e5e7eb;
+}
+
+.tracking-error {
+  color: #dc2626;
+  background-color: #fef2f2;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.tracking-arrived {
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.tracking-status {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.status-badge {
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.status-Creado {
+  background-color: #fef9c3;
+  color: #854d0e;
+}
+
+.status-En_entrega {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status-Entregado {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.tracking-map {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tracking-waiting {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin-top: 24px;
+}

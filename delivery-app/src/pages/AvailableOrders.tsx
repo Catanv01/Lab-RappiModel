@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../service/api';
-import '../styles/availableOrders.css';
+import '../styles/AvailableOrders.css';
 
 interface OrderItem {
   id: string;
@@ -50,8 +50,8 @@ const AvailableOrders = () => {
 
   const handleAccept = async (orderId: string) => {
     try {
-      await api.patch(`/orders/${orderId}/status`, { status: 'accepted' });
-      setOrders(orders.filter((o) => o.id !== orderId));
+      await api.patch(`/orders/${orderId}/accept`);
+      navigate(`/orders/${orderId}/map`);
     } catch {
       setError('Error accepting order');
     }
